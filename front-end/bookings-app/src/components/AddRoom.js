@@ -1,5 +1,4 @@
 // page 5 
-// mistake created page 4 insted
 import React, { Component } from 'react';
 import { Form, FormGroup, Label, Input, Col, InputGroupAddon, InputGroup, Button} from 'reactstrap';
 
@@ -101,17 +100,6 @@ class AddRoom extends Component{
             <div className="container mt-5">
                 <div className="col-12 col-md-9">
                     <Form onSubmit={this.handleSubmit}>
-                        {/* <FormGroup row>
-                            <Label htmlFor="title" md={2}>Title</Label>
-                            <Col md={10}>
-                                <Input type="select" name="title"
-                                        value={this.state.title}
-                                        onChange={this.handleInputChange}>
-                                    <option>Mr.</option>
-                                    <option>Miss.</option>
-                                </Input>
-                            </Col>
-                        </FormGroup> */}
                         <FormGroup row>
                             <Label htmlFor="title" md={2}>Title</Label>
                             <Col md={10}>
