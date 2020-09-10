@@ -10,7 +10,7 @@ class AddRoom extends Component{
     constructor(props){
         super(props);
         this.state = {
-            title : 'Mr.',
+            title : '',
             image : null,
             capacity : 0,
             description : '',
@@ -27,6 +27,7 @@ class AddRoom extends Component{
 
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        // this.handlePriceHour = this.handlePriceHour.bind(this);
     }
 
     handleInputChange(event) {
@@ -89,6 +90,7 @@ class AddRoom extends Component{
             )
             }
             else{
+                // this.handlePriceHour();
                 return(
                     <div></div>
                 )
@@ -99,7 +101,7 @@ class AddRoom extends Component{
             <div className="container mt-5">
                 <div className="col-12 col-md-9">
                     <Form onSubmit={this.handleSubmit}>
-                        <FormGroup row>
+                        {/* <FormGroup row>
                             <Label htmlFor="title" md={2}>Title</Label>
                             <Col md={10}>
                                 <Input type="select" name="title"
@@ -108,6 +110,14 @@ class AddRoom extends Component{
                                     <option>Mr.</option>
                                     <option>Miss.</option>
                                 </Input>
+                            </Col>
+                        </FormGroup> */}
+                        <FormGroup row>
+                            <Label htmlFor="title" md={2}>Title</Label>
+                            <Col md={10}>
+                                <Input type="text" name="title"
+                                        value={this.state.title}
+                                        onChange={this.handleInputChange}/>
                             </Col>
                         </FormGroup>
                         <FormGroup row>
