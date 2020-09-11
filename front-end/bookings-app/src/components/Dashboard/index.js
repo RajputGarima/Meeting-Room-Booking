@@ -117,9 +117,9 @@ const TimeDateStats = () =>  {
             <Grid.Column floated='left' textAlign='left'>
               Last Logged In
             </Grid.Column>
-            <Grid.Column floated='right' textAlign='right'>
-              Date: {currentDate}<br/> 
-              Time: {currentTime}
+            <Grid.Column floated='right' textAlign='right' padded>
+              {currentTime}<br/>
+              <small>{currentDate}</small>
             </Grid.Column>
           </Grid>
       </Container>
