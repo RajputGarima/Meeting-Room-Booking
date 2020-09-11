@@ -5,8 +5,10 @@ import {
     Route,
     Link
   } from "react-router-dom";
-import { Tab, Segment, Header, Grid, Container, Divider, Statistic, Image, List } from 'semantic-ui-react';
-import Bookings from '../Bookings';
+import { Tab, Segment, Header, Grid, Container, Divider, Statistic, Button, Image, List } from 'semantic-ui-react';
+
+// Calendar date picking
+import DatePicker from 'react-date-picker'
 
 const BookingsCounter = () =>{
   return(
@@ -39,6 +41,8 @@ const BookingsCounter = () =>{
 }
 
 const DashboardInternal = () =>{
+
+  const [date, setDate] = useState(new Date())
   return(
     <Container textAlign='left'>
     <Grid columns='equal' padded divided>
@@ -58,8 +62,7 @@ const DashboardInternal = () =>{
               Reservations
             </Header>
             <Divider/>
-            
-
+            <DatePicker value={date} onChange={setDate}/><Button icon='print'/>
           </Segment>
         </Grid.Column>
         
