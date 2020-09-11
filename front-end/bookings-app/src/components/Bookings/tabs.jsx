@@ -6,25 +6,15 @@ import {
     Link
   } from "react-router-dom";
 import { Tab, MenuItem } from 'semantic-ui-react'
-<<<<<<< Updated upstream
 // import RoomLayout from './roomLayout_dropdown'
 // import DurationType from './duration_dropdown'
 // import StatusType from './status_dropdown'
 import PaymentType from './payment_dropdown'
 import { Image, Rail, Segment, Grid, Step, Button, Input, Label, Checkbox, Table, Dropdown } from 'semantic-ui-react'
-=======
-import RoomType from './roomType_dropdown'
-import RoomLayout from './roomLayout_dropdown'
-import DurationType from './duration_dropdown'
-import StatusType from './status_dropdown'
-import PaymentType from './payment_dropdown'
-import { Image, Rail, Segment, Grid, Step, Button, Input, Label, Checkbox, Table } from 'semantic-ui-react'
->>>>>>> Stashed changes
 import { DatePicker, Space, Card } from 'antd';
 import 'antd/dist/antd.css';
 import { render } from 'react-dom';
 
-<<<<<<< Updated upstream
 const roomTypeDefinitions = [
   { key: 1, text: 'Panoramic Room', value: 1, price: 500 },
   { key: 2, text: 'Small Conference Room', value: 2, price: 300 },
@@ -56,11 +46,6 @@ const paymentDefinitions = [
   { key: 3, text: 'Credit Card', value: 3 },
   { key: 4, text: 'UPI', value: 4 },
 ]
-=======
-const roomTypeDefinitions = ['Panoramic Room','Small Conference Room','Large Conference Room']
-// const roomTypeOptions = roomTypeDefinitions.map()
-
->>>>>>> Stashed changes
 
 class AddBooking extends Component{
   constructor(props){
@@ -94,17 +79,12 @@ class AddBooking extends Component{
  
   onChangeDate(dateString) {
     this.setState({
-<<<<<<< Updated upstream
       date: dateString,
-=======
-      date: dateString
->>>>>>> Stashed changes
     })
     console.log(dateString);
   }
   onChangeRoomType(prop) {
     this.setState({
-<<<<<<< Updated upstream
       room_type: roomTypeDefinitions[prop.value - 1].text,
       room_price: roomTypeDefinitions[prop.value - 1].price,
     })
@@ -127,39 +107,12 @@ class AddBooking extends Component{
   onChangeStatus(prop) {
     this.setState({
       status : statusDefinitions[prop.value -1].text,
-=======
-      room_type: prop.text,
-      room_price: prop.price,
-    })
-    console.log(prop.text);
-    console.log(prop.price);
-  }
-  onChangeRoomLayout(room) {
-    this.setState({
-      room_layout: room
-    })
-    console.log(room);
-  }
-  onChangeDuration(prop) {
-    this.setState({
-      duration: prop
-    })
-    console.log(prop);
-  }
-  onChangeStatus(prop) {
-    this.setState({
-      status : prop
->>>>>>> Stashed changes
     })
     console.log(prop);
   }
   onChangePayment(prop) {
     this.setState({
-<<<<<<< Updated upstream
       payment_method : paymentDefinitions[prop.value -1].text,
-=======
-      payment_method : prop
->>>>>>> Stashed changes
     })
     console.log(prop);
   }
@@ -202,29 +155,17 @@ class AddBooking extends Component{
     
                       <Grid.Row >
                         <Grid.Column>  <p>Room Type</p>   </Grid.Column> 
-<<<<<<< Updated upstream
                         <Grid.Column>  <Dropdown clearable options={roomTypeDefinitions} selection onChange={(event,data) =>{this.onChangeRoomType(data)}} />  </Grid.Column>                  
-=======
-                        <Grid.Column>  <RoomType onChange={this.onChangeRoomType}/>  </Grid.Column>                  
->>>>>>> Stashed changes
                       </Grid.Row>
               
                       <Grid.Row>
                         <Grid.Column>  <p>Room Layout</p>   </Grid.Column>
-<<<<<<< Updated upstream
                         <Grid.Column>  <Dropdown clearable options={roomLayoutDefinitions} selection onChange={(event,data) =>{this.onChangeRoomLayout(data)}} />  </Grid.Column>
-=======
-                        <Grid.Column>  <RoomLayout onChange={this.onChangeRoomLayout}/>  </Grid.Column>
->>>>>>> Stashed changes
                       </Grid.Row>
 
                       <Grid.Row>
                         <Grid.Column>  <p>Duration</p>   </Grid.Column>
-<<<<<<< Updated upstream
                         <Grid.Column>  <Dropdown clearable options={durationDefinitions} selection onChange={(event,data) =>{this.durationDefinitions(data)}} />  </Grid.Column>
-=======
-                        <Grid.Column>  <DurationType onChange={this.onChangeDuration}/>  </Grid.Column>
->>>>>>> Stashed changes
                       </Grid.Row>
 
                       <Grid.Row>
@@ -250,20 +191,12 @@ class AddBooking extends Component{
 
                       <Grid.Row>
                         <Grid.Column>  <p>Status</p>   </Grid.Column>
-<<<<<<< Updated upstream
                         <Grid.Column>  <Dropdown clearable options={statusDefinitions} selection onChange={(event,data) =>{this.onChangeStatus(data)}} /> </Grid.Column>
-=======
-                        <Grid.Column>  <StatusType onChange={this.onChangeStatus}/>  </Grid.Column>
->>>>>>> Stashed changes
                       </Grid.Row>
 
                       <Grid.Row>
                         <Grid.Column>  <p>Payment Method</p>   </Grid.Column>
-<<<<<<< Updated upstream
                         <Grid.Column>  <Dropdown clearable options={paymentDefinitions} selection onChange={(event,data) =>{this.paymentDefinitions(data)}} />  </Grid.Column>
-=======
-                        <Grid.Column>  <PaymentType onChange={this.onChangePayment}/>  </Grid.Column>
->>>>>>> Stashed changes
                       </Grid.Row>
 
                       <Grid.Row>
@@ -340,7 +273,6 @@ class AddBooking extends Component{
                   <Table.Cell>$5.00 per booking</Table.Cell>
                   <Table.Cell><Checkbox/></Table.Cell>
                 </Table.Row>
-<<<<<<< Updated upstream
 
                 <Table.Row>
                   <Table.Cell>Video Conferencing</Table.Cell>
@@ -371,14 +303,6 @@ class AddBooking extends Component{
                 <Table.Row>
                   <Table.HeaderCell colSpan='1'>
                     <Menu floated='right' pagination>
-=======
-              </Table.Body>
-
-              <Table.Footer>
-                <Table.Row>
-                  <Table.HeaderCell colSpan='4'>
-                    {/* <Menu floated='right' pagination>
->>>>>>> Stashed changes
                       <Menu.Item as='a' icon>
                         <Icon name='chevron left' />
                       </Menu.Item>
@@ -389,7 +313,6 @@ class AddBooking extends Component{
                       <Menu.Item as='a' icon>
                         <Icon name='chevron right' />
                       </Menu.Item>
-<<<<<<< Updated upstream
                     </Menu>
                     
                   </Table.HeaderCell>
@@ -400,19 +323,11 @@ class AddBooking extends Component{
             <div>
             <button className = "save_equipment"> Save </button>
             </div>
-=======
-                    </Menu> */}
-                  </Table.HeaderCell>
-                </Table.Row>
-              </Table.Footer>
-            </Table>
->>>>>>> Stashed changes
 
           
 
 
           </Segment>
-<<<<<<< Updated upstream
       
 
           <Segment raised> <Step.Group>  <Step>Food & Drinks</Step>  </Step.Group>
@@ -479,9 +394,6 @@ class AddBooking extends Component{
           </div>
           </Segment>
         </Tab.Pane> 
-=======
-      </Tab.Pane> 
->>>>>>> Stashed changes
     //   { menuItem: 'Client Details', render: () => <Tab.Pane>Tab 2 Content</Tab.Pane> },
     // ]
     
