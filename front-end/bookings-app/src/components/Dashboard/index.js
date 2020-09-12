@@ -13,6 +13,23 @@ import DatePicker from 'react-date-picker';
 // Scroll Bar
 
 const BookingsCounter = () =>{
+  const [bookings, setBookings] = 
+    useState([{room:"Small Conference Room", bookedForDate:new Date(2020, 3, 25), bookedForDuration:"8-9", bookedOnDate:new Date('March 25, 2020 09:24:00'), user:"Mallory Norman"}, 
+              {room:"Large Conference Room", bookedForDate:new Date(2020, 3, 17), bookedForDuration:"Morning", bookedOnDate:new Date('February 17, 2020 08:24:00'), user:"Dorothy Jacobs"}, 
+              {room:"Panoramic Room", bookedForDate:new Date(2020, 8, 12), bookedForDuration:"Afternoon", bookedOnDate:new Date('January 17, 2020 01:24:00'), user:"Jason McCarty"}]);
+
+  const [date, setDate] = useState(new Date());
+
+  const filterByBookedOnDate = (booking)=>{
+    if(booking.bookedOnDate.toLocaleDateString()===date.toLocaleDateString()) return true;
+    return false;  
+  }
+
+  const filterByBookedForDate = (booking)=>{
+    if(booking.bookedForDate.toLocaleDateString()===date.toLocaleDateString()) return true;
+    return false;  
+  }
+
   return(
     <Segment textAlign='center'>
       <Grid columns='equal' divided>
@@ -20,20 +37,20 @@ const BookingsCounter = () =>{
           <Grid.Column>
             <Statistic>
               <Statistic.Label>Bookings made today</Statistic.Label>
-              <Statistic.Value>0</Statistic.Value>
+              <Statistic.Value>{bookings.filter(filterByBookedOnDate).length}</Statistic.Value>
             </Statistic>
           </Grid.Column>
 
           <Grid.Column>
             <Statistic>
               <Statistic.Label>Bookings for today</Statistic.Label>
-              <Statistic.Value>0</Statistic.Value>
+                <Statistic.Value>{bookings.filter(filterByBookedForDate).length}</Statistic.Value>
             </Statistic>
           </Grid.Column>
           <Grid.Column>
             <Statistic>
               <Statistic.Label>Total bookings made</Statistic.Label>
-              <Statistic.Value>0</Statistic.Value>
+              <Statistic.Value>{bookings.length}</Statistic.Value>
             </Statistic>
           </Grid.Column>
         </Grid.Row>
@@ -56,7 +73,7 @@ const LatestBookings = ()=>{
   for (let i=0; i < 3 && i < bookings.length; i++){
     latestBookings.push(bookings[i]);
   }
-  console.log(latestBookings)
+
   return (
     <Grid.Column>
       <Segment style={{height: '40vh'}}>
@@ -80,11 +97,52 @@ const LatestBookings = ()=>{
   );
 }
 
+const DisplayReservationsOnDate = ({reservationsOnDate}) =>{
+  if(reservationsOnDate) return(
+    <Segment style={{ overflow: 'auto', maxHeight:'20vh' }}>
+    <List as='ul'>
+      {reservationsOnDate.map(booking => (
+        <List.Item as='li'>
+          <b>{booking.room}</b><br/>
+          <i>{booking.user}</i><br/>
+          {booking.bookedForDuration}<br/>
+          
+        </List.Item>)
+        )
+      }
+    </List>
+  </Segment>
+  )
+  else{
+    return(<Segment style={{ overflow: 'auto', maxHeight:'20vh' }}></Segment>)
+  }
+}
+
+
+
 
 const Reservations = ()=>{
-  const [date, setDate] = useState();
-  <GetReservations date/>
-  const getReservations = null;
+  const [date, setDate] = useState(new Date());
+  const [bookings, setBookings] = 
+    useState([{room:"Small Conference Room", bookedForDate:new Date(2020, 3, 25), bookedForDuration:"8-9", bookedOnDate:new Date('March 25, 2020 09:24:00'), user:"Mallory Norman"}, 
+              {room:"Large Conference Room", bookedForDate:new Date(2020, 3, 17), bookedForDuration:"Morning", bookedOnDate:new Date('February 17, 2020 08:24:00'), user:"Dorothy Jacobs"}, 
+              {room:"Panoramic Room", bookedForDate:new Date(2020, 8, 12), bookedForDuration:"Afternoon", bookedOnDate:new Date('January 17, 2020 01:24:00'), user:"Jason McCarty"}]);
+
+  const [reservationsOnDate, setReservationsOnDate] = useState([]);
+
+  const filterByBookedForDate = (booking)=>{
+    if(booking.bookedForDate.toLocaleDateString()===date.toLocaleDateString()) return true;
+    return false;  
+  }
+
+  const getReservationsByDate = ()=>{
+    if(date) setReservationsOnDate(bookings.filter(filterByBookedForDate));
+    else{
+      alert("Please enter valid date");
+    }
+  }
+
+  console.log(reservationsOnDate);
   return (
     <Grid.Column>
       <Segment style={{height: '40vh'}}>
@@ -101,17 +159,9 @@ const Reservations = ()=>{
           yearPlaceholder="yyyy"
         />
         
-        <Button content='Print' icon='print' floated='right' size='tiny' color='blue'/>
-
-        <Segment style={{ overflow: 'auto', maxHeight:'30vh' }}>
-          <List as='ul'>
-            {/* {bookingForDate.map(booking => (<List.Item as='li'>
-                                              <b>{booking.room}</b><br/>
-                                              {booking.bookedForDate.toLocaleDateString()}<br/>
-                                              <i>{booking.user}</i>
-                                            </List.Item>))} */}
-          </List>
-        </Segment>
+        <Button content='Print' icon='print' floated='right' size='tiny' color='blue' 
+                onClick={getReservationsByDate}/>
+        <DisplayReservationsOnDate reservationsOnDate={reservationsOnDate}/>
         
       </Segment>
     </Grid.Column>
@@ -119,31 +169,35 @@ const Reservations = ()=>{
 
 }
 
-const QuickLinks = () => (
-  <Grid.Column>
-    <Segment style={{height: '40vh'}}>
-      <Header as='h3'>
-        Quick Links
-      </Header>
-      <Divider/>
-      <Router>
-        <List>
-          <List.Item as={Link} to={'/'}>+ Add booking</List.Item>
-          <List.Item as={Link} to={'/addroom'}>+ Add room</List.Item>
-        </List>
+const QuickLinks = () => {
 
-        <List>
-          <List.Item as={Link} to='/'>View Bookings</List.Item>
-          <List.Item as={Link} to='/'>View Rooms</List.Item>
-          <List.Item as={Link} to='/'>Manage Equipment</List.Item>
-          <List.Item as={Link} to='/'>Edit Booking form</List.Item>
-          <List.Item as={Link} to='/'>Language settings</List.Item>
-          <List.Item as={Link} to='/'>Back up your files</List.Item>
-        </List>
-      </Router>
-    </Segment>
-  </Grid.Column>
-)
+  return(
+    <Grid.Column>
+      <Segment style={{height: '40vh'}}>
+        <Header as='h3'>
+          Quick Links
+        </Header>
+        <Divider/>
+        <Router>
+          <List>
+            <List.Item as={Link} to={'/'}>+ Add booking</List.Item>
+            <List.Item as={Link} to={'/addroom'}>+ Add room</List.Item>
+          </List>
+
+          <List>
+            <List.Item as={Link} to='/'>View Bookings</List.Item>
+            <List.Item as={Link} to='/'>View Rooms</List.Item>
+            <List.Item as={Link} to='/'>Manage Equipment</List.Item>
+            <List.Item as={Link} to='/'>Edit Booking form</List.Item>
+            <List.Item as={Link} to='/'>Language settings</List.Item>
+            <List.Item as={Link} to='/'>Back up your files</List.Item>
+          </List>
+        </Router>
+      </Segment>
+    </Grid.Column>
+  )
+}
+
 const DashboardInternal = () =>{
 
   return(
