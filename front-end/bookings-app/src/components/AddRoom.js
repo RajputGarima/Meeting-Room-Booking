@@ -1,9 +1,8 @@
 // page 5 
 import React, { Component } from 'react';
 import { Form, FormGroup, Label, Input, Col, InputGroupAddon, InputGroup, Button} from 'reactstrap';
-
-// import layouts from either sv or layouts.json(mockData) and allLayouts = {layouts}
-const allLayouts = ["layout1", "layout2", "layout3", "layout4", "layout5", "layout6"];
+import Select from 'react-select';
+import { layouts } from '../shared/layouts'
 
 class AddRoom extends Component{
     constructor(props){
@@ -20,13 +19,20 @@ class AddRoom extends Component{
                     },
             price_per_hour : 0,
             price_per_day : 0,
-            layouts : '',   
-            status : 'Active'
+            layouttype : null,   
+            status : 'Active',
+
+            layouts: layouts,
+            selectedLayout: null
         }
 
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        // this.handlePriceHour = this.handlePriceHour.bind(this);
+        this.updatePricePerHour = this.updatePricePerHour.bind(this);
+    }
+
+    handleLayoutChange = selectedLayout => {
+        this.setState({selectedLayout})
     }
 
     handleInputChange(event) {
@@ -53,23 +59,31 @@ class AddRoom extends Component{
         });
     }
 
-    layoutoptionList = () => {
-        const laylist = allLayouts.map((layout) => {
-           return <option>{layout}</option>
-        })
-        return laylist;
+    updatePricePerHour(){                                // updating after submit action, why?
+        this.setState(
+            {price_per_hour: 0},
+            () => console.log(this.state.price_per_hour)
+        )
+        console.log(this.state.price_per_hour)
     }
 
-    handleSubmit(event) { 
+    handleSubmit(event) {
+        event.preventDefault();
+        if(this.state.bookfor.hour === false){
+            this.setState({price_per_hour:0})
+        }
         console.log("State : " + JSON.stringify(this.state));
         alert("State : " + JSON.stringify(this.state));
     }
 
     render(){
         console.log(this.state)
-        const laylist = this.layoutoptionList();
 
-        // only reder when price_per_hour is selected 
+        const { selectedLayout } = this.state;
+        const layoutdropdown = this.state.layouts.map((layout) => { 
+            return {value: layout.id, label:layout.title}
+        })
+        // only read when price_per_hour is selected 
         const Price_Per_hour = () => {
             if(this.state.bookfor.hour === true){
 
@@ -89,7 +103,7 @@ class AddRoom extends Component{
             )
             }
             else{
-                // this.handlePriceHour();
+                // this.updatePricePerHour()
                 return(
                     <div></div>
                 )
@@ -169,11 +183,11 @@ class AddRoom extends Component{
                         <FormGroup row>
                             <Label htmlFor="layouts" md={2}>Layouts</Label>
                             <Col md={10}>
-                            <Input type="select" name="layouts"
-                                    value={this.state.layouts}
-                                    onChange={this.handleInputChange}>
-                                {laylist}
-                            </Input>
+                            <Select 
+                                value={selectedLayout}
+                                onChange={this.handleLayoutChange}
+                                options={layoutdropdown}
+                                />
                             </Col>
                         </FormGroup>
                         <FormGroup row>

@@ -84,7 +84,7 @@ class LayoutsList extends Component {
             )
         })
 
-        const roomdropdown = rooms.map((room) => {
+        const roomdropdown = this.state.rooms.map((room) => {
             return {value: room.id, label:room.title}
         })
 
