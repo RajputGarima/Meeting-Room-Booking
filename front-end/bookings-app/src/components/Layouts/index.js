@@ -1,6 +1,6 @@
-import React, { Component, useState } from 'react';
-import { layouts } from '../shared/layouts';
-import { rooms } from '../shared/rooms';
+import React, { Component } from 'react';
+import { layouts } from '../../shared/layouts';
+import { rooms } from '../../shared/rooms';
 import { Table, Media, Form, FormGroup, Label,
         Button, Modal, ModalHeader, ModalBody, Input } from 'reactstrap';
 import Select from 'react-select';
