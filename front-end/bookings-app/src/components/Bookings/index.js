@@ -11,14 +11,12 @@ import BookingTabs from './tabs.jsx'
 const Bookings = ()=>{
 return (
     <div>
-    <Tab.Pane>
       <Segment>
           <Header content="BOOKINGS"/>
           <React.StrictMode>
           <BookingTabs/>
           </React.StrictMode>,
       </Segment>
-    </Tab.Pane> 
     </div>
 )
 }
