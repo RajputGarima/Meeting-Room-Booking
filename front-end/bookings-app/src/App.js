@@ -7,13 +7,16 @@ import axios from 'axios';
 import Menu from './components/Menu';
 import AddRoom from './components/AddRoom'
 import AddClient from './components/AddClientDetails'
-import LayoutsList from './components/LayoutsList';
+
 import Bookings from './components/Bookings';
 import LoginForm from './components/AdminLogin/LoginForm';
  
 import PrivateRoute from './components/AdminLogin/services/PrivateRoute';
 import PublicRoute from './components/AdminLogin/services/PublicRoute';
 import { getToken, removeUserSession, setUserSession } from './components/AdminLogin/services/Common';
+
+import LayoutsList from './components/Layouts';
+import EquipmentList from './components/Equipments';
 
 function App() {
   const [authLoading, setAuthLoading] = useState(true);
@@ -40,12 +43,17 @@ function App() {
   return (
     <BrowserRouter>
         <Switch>
-            {/* <Route path='/adminLogin' component={()=><LoginForm/>} /> */}
             <Route path='/dashboard' component={() => <Menu/> } /> 
             <Route path='/addclient' component={()=> <AddClient/>} />
             <Route path='/layoutslist' component={()=> <LayoutsList/>} />
+
             <PublicRoute path="/login" component={LoginForm} />
             <PrivateRoute path="/dashboard" component={Menu} />
+            
+            <Route path='/equipmentslist' component={()=> <EquipmentList/>} />
+
+            <PublicRoute path="/login" component={LoginForm} />
+
             <Redirect to = '/dashboard' />
         </Switch>
     </BrowserRouter>

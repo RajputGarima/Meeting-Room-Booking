@@ -127,7 +127,7 @@ class AddBooking extends Component{
     //   { menuItem: 'Booking Details', render: () => 
     <Tab.Pane  >
           <Segment raised> <Step.Group>  <Step>Date & Time</Step>  </Step.Group>
-            <Grid columns = {2} >
+            <Grid columns = {2}>
               <Grid.Row >
                 <Grid.Column>
                   <div>
