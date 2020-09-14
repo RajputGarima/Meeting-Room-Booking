@@ -1,0 +1,15 @@
+POST -
+
+ {
+    "foodName":"Coffee",
+    "foodPrice": 5
+ }
+ 
+ 
+ GET -
+ 
+ {
+    "foodId": 1,
+    "foodName": "Coffee",
+    "foodPrice": 5.0
+}
