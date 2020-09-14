@@ -64,7 +64,6 @@ class AddRoom extends Component{
             {price_per_hour: 0},
             () => console.log(this.state.price_per_hour)
         )
-        console.log(this.state.price_per_hour)
     }
 
     handleSubmit(event) {
