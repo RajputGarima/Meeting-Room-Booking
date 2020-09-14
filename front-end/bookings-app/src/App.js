@@ -8,7 +8,6 @@ import Menu from './components/Menu';
 import AddRoom from './components/AddRoom'
 import AddClient from './components/AddClientDetails'
 
-import LayoutsList from './components/LayoutsList';
 import Bookings from './components/Bookings';
 import LoginForm from './components/AdminLogin/LoginForm';
  
@@ -44,7 +43,6 @@ function App() {
   return (
     <BrowserRouter>
         <Switch>
-            {/* <Route path='/adminLogin' component={()=><LoginForm/>} /> */}
             <Route path='/dashboard' component={() => <Menu/> } /> 
             <Route path='/addclient' component={()=> <AddClient/>} />
             <Route path='/layoutslist' component={()=> <LayoutsList/>} />
