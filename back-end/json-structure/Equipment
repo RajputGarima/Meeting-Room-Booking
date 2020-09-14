@@ -1,0 +1,20 @@
+POST -
+
+{
+    "name":"Wi-Fi",
+    "multiUnits":false,
+    "price": 1370,
+    "priceType":1
+}
+
+// priceType: 0 for PER_HOUR, 1 for PER_BOOKING
+
+GET -
+
+{
+    "equipId": 1,
+    "name": "Wi-Fi",
+    "multiUnits": false,
+    "price": 1370.0,
+    "priceType": "PER_BOOKING"
+}
