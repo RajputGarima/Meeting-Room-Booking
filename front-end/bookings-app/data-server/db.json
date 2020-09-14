@@ -1,8 +1,22 @@
 {
     "users":[
-            {
-                "email":"s",
-                "password":"s"
+            {   
+                "id":0,
+                "email":"s@adobe.com",
+                "password":"s",
+                "token":"sdfsd"
+            },
+            {   
+                "id":1,
+                "email":"b@adobe.com",
+                "password":"b",
+                "token":"sdfsd"
+            },
+            {   
+                "id":2,
+                "email":"a@adobe.com",
+                "password":"a",
+                "token":"sdfsd"
             }
         ]
 }

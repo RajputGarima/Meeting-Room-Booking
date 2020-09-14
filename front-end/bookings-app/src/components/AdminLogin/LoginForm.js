@@ -10,12 +10,12 @@ function LoginForm(props) {
   const [error, setError] = useState(null);
 
   // handle button click of login form
-  const handleLogin = () => {
+  const handleLogin = (email, password) => {
     setError(null);
     setLoading(true);
-    axios.post('http://localhost:4000/users/', { email: email.value, password: password.value }).then(response => {
+    axios.get('http://localhost:4000/users', {params:{email: email, password:password}}).then(response => {
       setLoading(false);
-      setUserSession(response.data.token, response.data.user);
+      setUserSession(response.data[0].token, response.data[0].email);
       props.history.push('/dashboard');
     }).catch(error => {
       setLoading(false);
@@ -33,17 +33,24 @@ function LoginForm(props) {
       </Header>
       <Form size='large'>
         <Segment stacked>
-          <Form.Input fluid icon='user' iconPosition='left' placeholder='E-mail address' />
+          <Form.Input 
+            fluid 
+            icon='user' 
+            iconPosition='left' 
+            placeholder='E-mail address' 
+            onChange={evt=>setEmail(evt.target.value)}  
+          />
           <Form.Input
             fluid
             icon='lock'
             iconPosition='left'
             placeholder='Password'
             type='password'
+            onChange={evt=>setPassword(evt.target.value)}
           />
           
           {error && <><small style={{ color: 'red' }}>{error}</small><br /></>}<br />
-          <Button color='teal' fluid size='large' content={loading ? 'Loading...' : 'Login'} onClick={handleLogin} disabled={loading} />
+          <Button color='teal' fluid size='large' content={loading ? 'Loading...' : 'Login'} onClick={()=>handleLogin(email, password)} disabled={loading} />
         </Segment>
       </Form>
       <Message>

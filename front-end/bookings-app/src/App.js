@@ -7,6 +7,7 @@ import axios from 'axios';
 import Menu from './components/Menu';
 import AddRoom from './components/AddRoom'
 import AddClient from './components/AddClientDetails'
+<<<<<<< HEAD
 import LayoutsList from './components/LayoutsList';
 import Bookings from './components/Bookings';
 import LoginForm from './components/AdminLogin/LoginForm';
@@ -15,6 +16,10 @@ import PrivateRoute from './components/AdminLogin/services/PrivateRoute';
 import PublicRoute from './components/AdminLogin/services/PublicRoute';
 import { getToken, removeUserSession, setUserSession } from './components/AdminLogin/services/Common';
 
+=======
+import LayoutsList from './components/Layouts';
+import EquipmentList from './components/Equipments';
+>>>>>>> master
 
 function App() {
   const [authLoading, setAuthLoading] = useState(true);
@@ -48,6 +53,8 @@ function App() {
 
             <PublicRoute path="/login" component={LoginForm} />
             <PrivateRoute path="/dashboard" component={Menu} />
+            
+            <Route path='/equipmentslist' component={()=> <EquipmentList/>} />
             <Redirect to = '/dashboard' />
         </Switch>
     </BrowserRouter>
