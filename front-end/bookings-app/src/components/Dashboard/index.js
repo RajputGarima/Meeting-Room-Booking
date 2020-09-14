@@ -3,14 +3,15 @@ import {
     BrowserRouter as Router,
     Switch,
     Route,
-    Link
+    Link,
+    NavLink
   } from "react-router-dom";
 import { Tab, Segment, Header, Grid, Container, Divider, Statistic, Button, Item, Image, List, Placeholder } from 'semantic-ui-react';
 
 // Calendar date picking
 import DatePicker from 'react-date-picker';
 
-// Scroll Bar
+import { getUser, removeUserSession } from '../AdminLogin/services/Common';
 
 const BookingsCounter = () =>{
   const [bookings, setBookings] = 
@@ -32,7 +33,7 @@ const BookingsCounter = () =>{
 
   return(
     <Segment textAlign='center'>
-      <Grid columns='equal' divided>
+      <Grid columns='equal' divided stackable>
         <Grid.Row columns='equal' stretched >
           <Grid.Column>
             <Statistic>
@@ -122,11 +123,12 @@ const DisplayReservationsOnDate = ({reservationsOnDate}) =>{
 
 
 const Reservations = ()=>{
-  const [date, setDate] = useState(new Date());
   const [bookings, setBookings] = 
     useState([{room:"Small Conference Room", bookedForDate:new Date(2020, 3, 25), bookedForDuration:"8-9", bookedOnDate:new Date('March 25, 2020 09:24:00'), user:"Mallory Norman"}, 
               {room:"Large Conference Room", bookedForDate:new Date(2020, 3, 17), bookedForDuration:"Morning", bookedOnDate:new Date('February 17, 2020 08:24:00'), user:"Dorothy Jacobs"}, 
               {room:"Panoramic Room", bookedForDate:new Date(2020, 8, 12), bookedForDuration:"Afternoon", bookedOnDate:new Date('January 17, 2020 01:24:00'), user:"Jason McCarty"}]);
+
+  const [date, setDate] = useState(new Date());
 
   const [reservationsOnDate, setReservationsOnDate] = useState([]);
 
@@ -145,22 +147,29 @@ const Reservations = ()=>{
   console.log(reservationsOnDate);
   return (
     <Grid.Column>
+
       <Segment style={{height: '40vh'}}>
         <Header as='h3'>
           Reservations
         </Header>
         <Divider/>
         
-        <DatePicker 
-          value={date} 
-          onChange={setDate} 
-          dayPlaceholder="dd"
-          monthPlaceholder="mm"
-          yearPlaceholder="yyyy"
-        />
+        <Grid columns={2} stackable>
+          <Grid.Column textAlign='center'>
+            <DatePicker 
+            value={date} 
+            onChange={setDate} 
+            dayPlaceholder="dd"
+            monthPlaceholder="mm"
+            yearPlaceholder="yyyy"
+            />
+          </Grid.Column >
+          <Grid.Column textAlign='center'>
+            <Button content='Print' icon='print' size='tiny' color='blue' 
+                  onClick={getReservationsByDate}/>    
+          </Grid.Column>
+        </Grid>
         
-        <Button content='Print' icon='print' floated='right' size='tiny' color='blue' 
-                onClick={getReservationsByDate}/>
         <DisplayReservationsOnDate reservationsOnDate={reservationsOnDate}/>
         
       </Segment>
@@ -170,6 +179,7 @@ const Reservations = ()=>{
 }
 
 const QuickLinks = () => {
+  
 
   return(
     <Grid.Column>
@@ -178,21 +188,21 @@ const QuickLinks = () => {
           Quick Links
         </Header>
         <Divider/>
-        <Router>
-          <List>
-            <List.Item as={Link} to={'/'}>+ Add booking</List.Item>
-            <List.Item as={Link} to={'/addroom'}>+ Add room</List.Item>
-          </List>
 
-          <List>
-            <List.Item as={Link} to='/'>View Bookings</List.Item>
-            <List.Item as={Link} to='/'>View Rooms</List.Item>
-            <List.Item as={Link} to='/'>Manage Equipment</List.Item>
-            <List.Item as={Link} to='/'>Edit Booking form</List.Item>
-            <List.Item as={Link} to='/'>Language settings</List.Item>
-            <List.Item as={Link} to='/'>Back up your files</List.Item>
-          </List>
-        </Router>
+        <List>
+          <List.Item><Link to="/bookings">+ Add booking</Link></List.Item>
+          <List.Item><Link to="/addroom">+ Add room</Link></List.Item>
+        </List>
+
+        <List>
+          <List.Item><Link to="/bookings">View Bookings</Link></List.Item>
+          <List.Item><Link to="/menu">View Rooms</Link></List.Item>
+          <List.Item><Link to="/menu">Manage Equipment</Link></List.Item>
+          <List.Item><Link to="/menu">Edit Booking form</Link></List.Item>
+          <List.Item><Link to="/menu">Language settings</Link></List.Item>
+          <List.Item><Link to="/menu">Back up your files</Link></List.Item>
+        </List>
+
       </Segment>
     </Grid.Column>
   )
@@ -202,8 +212,8 @@ const DashboardInternal = () =>{
 
   return(
     <Container textAlign='left'>
-    <Grid divided padded>
-      <Grid.Row columns='equal' >
+    <Grid padded stackable>
+      <Grid.Row columns='equal'>
         <LatestBookings/>
         <Reservations/>
         <QuickLinks/>
@@ -247,19 +257,27 @@ const LoginStats = () =>  {
 
 
 
-const Dashboard = ()=>{
-return (
-    <div>
-    <Tab.Pane>
-        <Segment textAlign='center'>
-          <Header content="DASHBOARD"/>
-        </Segment>
-        <BookingsCounter/>
-        <DashboardInternal/>
-        <LoginStats/>
-    </Tab.Pane> 
-    </div>
-)
+const Dashboard = (props)=>{
+
+  const user = getUser();
+
+  const handleLogout = () => {    
+    removeUserSession();
+    props.history.push('/login');
+  }
+  return (
+      <div>
+      <Tab.Pane>
+          <Segment textAlign='center'>
+            <Header content="DASHBOARD"/>
+            <Button content="Logout" onClick={handleLogout} />
+          </Segment>
+          <BookingsCounter/>
+          <DashboardInternal/>
+          <LoginStats/>
+      </Tab.Pane> 
+      </div>
+  )
 }
 
 export default Dashboard;
