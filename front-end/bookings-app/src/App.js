@@ -7,7 +7,7 @@ import Menu from './components/Menu';
 import AddRoom from './components/AddRoom'
 import AddClient from './components/AddClientDetails'
 import LayoutsList from './components/LayoutsList';
-import EquipmentList from './components/EquipmentList';
+import EquipmentList from './components/Equipments';
 
 function App() {
   return (

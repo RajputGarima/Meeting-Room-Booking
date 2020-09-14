@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { equipments } from '../shared/equipments';
+import { equipments } from '../../shared/equipments';
 
 import { Table, Col, Form, FormGroup, Label,
     Button, Modal, ModalHeader, ModalBody, Input,
