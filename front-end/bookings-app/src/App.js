@@ -15,7 +15,6 @@ import PrivateRoute from './components/AdminLogin/services/PrivateRoute';
 import PublicRoute from './components/AdminLogin/services/PublicRoute';
 import { getToken, removeUserSession, setUserSession } from './components/AdminLogin/services/Common';
 
-
 function App() {
   const [authLoading, setAuthLoading] = useState(true);
 
@@ -45,7 +44,6 @@ function App() {
             <Route path='/dashboard' component={() => <Menu/> } /> 
             <Route path='/addclient' component={()=> <AddClient/>} />
             <Route path='/layoutslist' component={()=> <LayoutsList/>} />
-
             <PublicRoute path="/login" component={LoginForm} />
             <PrivateRoute path="/dashboard" component={Menu} />
             <Redirect to = '/dashboard' />
