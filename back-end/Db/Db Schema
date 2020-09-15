@@ -1,0 +1,86 @@
+Table booking as B {
+  booking_id int [pk] // auto-increment
+  attendees int
+  total_cost double
+  booked_on datetime
+  booked_for datetime
+  start_time time
+  end_time time
+  room_fk int [ref: > room.room_id]
+  user_fk int [ref: > user.user_id]
+}
+
+Table equipment {
+  equip_id int [pk] // auto-increment
+  hourly_allowed boolean
+  multi_units boolean
+  title varchar
+  price double
+ }
+ 
+ Table food {
+   food_id int [pk] // auto-increment
+   food_name varchar
+   food_price double
+ }
+ 
+ Table room{
+   room_id int [pk] // auto-increment
+   bookings int
+   capacity int
+   image_url varchar
+   price_per_day double
+   status boolean
+   title varchar
+   
+ }
+ 
+ Table room_layout{
+   layout_id int [pk] // auto-increment
+   image_url varchar
+   title varchar
+ }
+ 
+ Table user{
+    user_id int [pk] // auto-increment
+    email varchar
+    name varchar
+    phone_number bigint
+ }
+ 
+ Table equipment_detail{
+   detail_id int [pk] // auto-increment
+   price double
+   units int
+   equip_fk int [ref: > equipment.equip_id]
+   booking_fk int [ref: > booking.booking_id]
+ }
+ 
+ 
+ Table food_booking{
+   id int [pk] // auto-increment
+   amount double
+   quantity int
+   food_fk int [ref: > food.food_id]
+   booking_fk int [ref: > booking.booking_id]
+ }
+ 
+ Table room_r_layout{
+   layout_fk int [ref: > room_layout.layout_id]
+   room_fk int [ref: > room.room_id]
+   
+ }
+ 
+ References -----
+ 
+ booking.user_fk (many-to-one) user.user_id
+ booking.room_fk (many-to-one) room.room_id
+ 
+ food_booking.food_fk (many-to-one) food.food_id
+ food_booking.booking_fk (many-to-one) booking.booking_id
+ 
+ equipment_detail.equip_fk (many-to-one) equipment.equip_id
+ equipment_detail.booking_fk (many-to-one) booking.booking_id
+ 
+ room_r_layout.layout_id (many-to-many) room_layout.layout_id
+ room_r_layout.room_id (many-to-many) room.room_id
