@@ -1,20 +1,19 @@
 POST -
 
 {
-    "name":"Wi-Fi",
+    "title":"Projector - Screen",
     "multiUnits":false,
-    "price": 1370,
-    "priceType":1
+    "price": 500,
+    "hourlyAllowed": false
 }
 
-// priceType: 0 for PER_HOUR, 1 for PER_BOOKING
 
 GET -
 
 {
-    "equipId": 1,
-    "name": "Wi-Fi",
+    "equipId": 3,
+    "title": "Projector - Screen",
     "multiUnits": false,
-    "price": 1370.0,
-    "priceType": "PER_BOOKING"
+    "price": 500.0,
+    "hourlyAllowed": false
 }
