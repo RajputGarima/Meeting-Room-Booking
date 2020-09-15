@@ -1,10 +1,10 @@
 export const equipments = [
     {
-        id: 0,
-        title: 'Projector/Screen',
+        id: 0,                      
+        title: 'Projector/Screen',  
         price: 90,
         hourlyAllowed: false,
-        multiple_allowed: false,
+        multiUnits: false,
         isAvailable: true
     },
     {
@@ -12,7 +12,7 @@ export const equipments = [
         title: 'Wi-fi',
         price: 0,
         hourlyAllowed: false,
-        multiple_allowed: false,
+        multiUnits: false,
         isAvailable: true
     },
     {
@@ -20,7 +20,7 @@ export const equipments = [
         title: 'Flipchart',
         price: 20,
         hourlyAllowed: true,
-        multiple_allowed: true,
+        multiUnits: true,
         isAvailable: true
     },
     {
@@ -28,7 +28,7 @@ export const equipments = [
         title: 'Video Conferencing',
         price: 49,
         hourlyAllowed: true,
-        multiple_allowed: false,
+        multiUnits: false,
         isAvailable: true
     },
 ]
