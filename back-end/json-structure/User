@@ -1,0 +1,39 @@
+POST--
+
+{
+    "email": "a@adobe.com",
+    "title": "Ms.",
+    "name": "a",
+    "phoneNumber": 7523874538,
+    "notes": "first booking",
+    "company": "adobe",
+    "address": 
+    {
+       "address": "bhopal",
+       "city": "bhopal",
+       "state": "mp",
+       "zip": 462021,
+       "country": "India"
+    },
+    "paymentMethod": "cash"
+}
+
+GET--
+
+{
+    "userId": 1,
+    "email": "a@adobe.com",
+    "title": "Ms.",
+    "name": "a",
+    "phoneNumber": 7523874538,
+    "notes": "first booking",
+    "company": "adobe",
+    "paymentMethod": "cash",
+    "address": {
+        "address": "bhopal",
+        "city": "bhopal",
+        "state": "mp",
+        "zip": 462021,
+        "country": "India"
+    }
+}
