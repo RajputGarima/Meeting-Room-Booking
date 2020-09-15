@@ -1,22 +1,70 @@
 {
-    "users":[
-            {   
-                "id":0,
-                "email":"s@adobe.com",
-                "password":"s",
-                "token":"sdfsd"
-            },
-            {   
-                "id":1,
-                "email":"b@adobe.com",
-                "password":"b",
-                "token":"sdfsd"
-            },
-            {   
-                "id":2,
-                "email":"a@adobe.com",
-                "password":"a",
-                "token":"sdfsd"
-            }
-        ]
+  "users": [
+    {
+      "id": 0,
+      "email": "s@adobe.com",
+      "password": "s",
+      "token": "sdfsd"
+    },
+    {
+      "id": 1,
+      "email": "b@adobe.com",
+      "password": "b",
+      "token": "sdfsd"
+    },
+    {
+      "id": 2,
+      "email": "a@adobe.com",
+      "password": "a",
+      "token": "sdfsd"
+    }
+  ],
+  "equipments": [
+    {
+      "id": 0,
+      "title": "Projector/Screen",
+      "price": 90,
+      "hourlyAllowed": false,
+      "multiUnits": false
+    },
+    {
+      "id": 1,
+      "title": "Wi-fi",
+      "price": 0,
+      "hourlyAllowed": false,
+      "multiUnits": false
+    },
+    {
+      "id": 2,
+      "title": "Flipchart",
+      "price": 20,
+      "hourlyAllowed": true,
+      "multiUnits": true
+    },
+    {
+      "id": 3,
+      "title": "Video Conferencing",
+      "price": 49,
+      "hourlyAllowed": true,
+      "multiUnits": false
+    },
+    {
+      "title": "Monitor",
+      "price": 10,
+      "hourlyAllowed": true,
+      "multiUnits": true,
+      "id": 4
+    },
+    {
+      "title": "heelo",
+      "id": 5
+    },
+    {
+      "title": "Hdmi",
+      "price": 0,
+      "hourlyAllowed": false,
+      "multiUnits": false,
+      "id": 6
+    }
+  ]
 }

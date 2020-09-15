@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import { equipments } from '../../shared/equipments';
+import axios from 'axios';
+// import { equipments } from '../../shared/equipments';
 
 import { Table, Col, Form, FormGroup, Label,
     Button, Modal, ModalHeader, ModalBody, Input,
     InputGroup, InputGroupAddon } from 'reactstrap';
 
 import Select from 'react-select';
+import Axios from 'axios';
 
 const options = [
     {value: true, label: 'per hour'},
@@ -16,12 +18,12 @@ class EquipmentsList extends Component {
     constructor(props){
         super(props);
         this.state = {
-            equipments: equipments,
+            // equipments: equipments,
             isModalOpen: false,
             title: '',
             price: 0,
             hourlyAllowed: false,
-            multiple_allowed: false,
+            multiUnits: false,
             selectedType: null
         }
 
@@ -52,26 +54,33 @@ class EquipmentsList extends Component {
         const value = target.type === 'checkbox' ? target.checked : target.value
         this.setState(
             {[name]: value}, () => {
-                console.log(JSON.stringify([ this.state.title, this.state.multiple_allowed, this.state.hourlyAllowed, this.state.price]));
+                console.log(JSON.stringify([ this.state.title, this.state.multiUnits, this.state.hourlyAllowed, this.state.price]));
             }
         );
     }
 
     handleSave(event) {
         this.toggleModal();
-        alert("added" + this.state.title + this.state.multiple_allowed + this.state.hourlyAllowed + this.state.price )
+        axios.post('http://localhost:3030/equipments', {
+            title: this.state.title,
+            price: this.state.price,
+            hourlyAllowed: this.state.hourlyAllowed,
+            multiUnits: this.state.multiUnits
+        })
+        // this.props.postEquipment(this.state.title, this.state.price, this.state.hourlyAllowed, this.state.multiUnits)
+        // alert("added" + this.state.title + this.state.multiUnits + this.state.hourlyAllowed + this.state.price )
         event.preventDefault();
     }
 
     render(){
         const { selectedType } = this.state;
-        const Equipments = this.state.equipments.map((equipment) => {
+        const Equipments = this.props.equipments.map((equipment) => {
             return(
                 <tr key={equipment.id}>
-                    <td>{equipment.id}</td>
+                    <td>{equipment.id + 1}</td>
                     <td>{equipment.title}</td>
                     <td>
-                        {equipment.multiple_allowed ? 'Yes':'No'}
+                        {equipment.multiUnits ? 'Yes':'No'}
                     </td>
                     <td>
                         {
@@ -97,10 +106,10 @@ class EquipmentsList extends Component {
                                         onChange={this.handleInputChange} />
                             </FormGroup>
                             <FormGroup row>
-                                <Label htmlFor="multiple_allowed" md={4}>Book multiple units</Label>
+                                <Label htmlFor="multiUnits" md={4}>Book multiple units</Label>
                                 <Col md={8}>
-                                    <Input type="checkbox" name="multiple_allowed"
-                                            value={this.state.multiple_allowed}
+                                    <Input type="checkbox" name="multiUnits"
+                                            value={this.state.multiUnits}
                                             onChange={this.handleInputChange}>
                                     </Input>
                                 </Col>

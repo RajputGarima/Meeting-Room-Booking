@@ -1,62 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import './App.css';
-import {Switch, Route, Redirect, BrowserRouter} from 'react-router-dom';
-import axios from 'axios';
+import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { ConfigureStore } from './redux/configureStore';
 
-//components
-import Menu from './components/Menu';
-import AddRoom from './components/AddRoom'
-import AddClient from './components/AddClientDetails'
+import Main from './components/Main'
 
-import Bookings from './components/Bookings';
-import LoginForm from './components/AdminLogin/LoginForm';
- 
-import PrivateRoute from './components/AdminLogin/services/PrivateRoute';
-import PublicRoute from './components/AdminLogin/services/PublicRoute';
-import { getToken, removeUserSession, setUserSession } from './components/AdminLogin/services/Common';
-
-import LayoutsList from './components/Layouts';
-import EquipmentList from './components/Equipments';
+const store = ConfigureStore();
 
 function App() {
-  const [authLoading, setAuthLoading] = useState(true);
-
-  useEffect(() => {
-    const token = getToken();
-    if (!token) {
-      return;
-    }
- 
-    axios.get(`http://localhost:4000/verifyToken?token=${token}`).then(response => {
-      setUserSession(response.data.token, response.data.user);
-      setAuthLoading(false);
-    }).catch(error => {
-      removeUserSession();
-      setAuthLoading(false);
-    });
-  }, []);
-
-  if (authLoading && getToken()) {
-    return <div className="content">Checking Authentication...</div>
-  }
-
+  
   return (
-    <BrowserRouter>
-        <Switch>
-            <Route path='/dashboard' component={() => <Menu/> } /> 
-            <Route path='/addclient' component={()=> <AddClient/>} />
-            <Route path='/layoutslist' component={()=> <LayoutsList/>} />
-
-            <PublicRoute path="/login" component={LoginForm} />
-            <PrivateRoute path="/dashboard" component={Menu} />
-            
-            <Route path='/equipmentslist' component={()=> <EquipmentList/>} />
-
-            <PublicRoute path="/login" component={LoginForm} />
-
-            <Redirect to = '/dashboard' />
-        </Switch>
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+          <div>
+            <Main />
+          </div>
+      </BrowserRouter>
+    </Provider>
   );
 }
 
