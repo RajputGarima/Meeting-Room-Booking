@@ -1,0 +1,110 @@
+POST--
+
+{   
+    "attendees": 10,
+    "room": { "roomId": 1},
+	  "roomLayout":{ "layoutId": 2},
+    "schedule": {
+    	"bookedFor": "",
+		  "startTime": "08:00:00",
+    	"endTime": "12:00:00"
+	   },
+	  "totalCost": 5000.00,	
+    "user":{ "userId": 1},
+    "foods":[
+        {   
+            "food":{ "foodId": 1},
+            "quantity": 2,
+            "amount": 80.00       
+        }
+       
+    ],
+    "equipDetails":[ 
+        {
+    		    "equipment":{ "equipId": 1},
+    		    "units": 2,
+    		    "price": 1500
+        }
+    ],
+    "status": 1 
+  }
+  
+  // In foods: amount = quantity*foodPrice
+  // In equipDetails: price = units*price(of equipment)
+  // totalCost = cost of the whole booking with the foods and equipments
+  // status : 0 for pending(default), 1 for confirmed
+  
+  
+  GET--
+  
+  {
+    "bookingId": 3,
+    "attendees": 10,
+    "totalCost": 5000.0,
+    "schedule": {
+        "bookedOn": "2020-09-15T05:12:51.275+00:00",
+        "bookedFor": null,
+        "startTime": "08:00:00",
+        "endTime": "12:00:00"
+    },
+    "room": {
+        "roomId": 1,
+        "title": "Small conference room",
+        "imageUrl": "api/image",
+        "pricePerDay": 5000,
+        "capacity": 20,
+        "bookings": 5,
+        "status": true,
+        "roomLayouts": []
+    },
+    "user": {
+        "userId": 1,
+        "email": "a@adobe.com",
+        "title": "Ms.",
+        "name": "a",
+        "phoneNumber": 7523874538,
+        "notes": "first booking",
+        "company": "adobe",
+        "paymentMethod": "cash",
+        "address": {
+            "address": "bhopal",
+            "city": "bhopal",
+            "state": "mp",
+            "zip": 462021,
+            "country": "India"
+        }
+    },
+    "roomLayout": {
+        "layoutId": 2,
+        "imageUrl": "api/image",
+        "title": "Conference",
+        "rooms": []
+    },
+    "status": true,
+    "foods": [
+        {
+            "id": 4,
+            "food": {
+                "foodId": 1,
+                "foodName": "Coke",
+                "foodPrice": 50.0
+            },
+            "quantity": 2,
+            "amount": 80.0
+        }
+    ],
+    "equipDetails": [
+        {
+            "detailId": 3,
+            "units": 2,
+            "price": 1500.0,
+            "equipment": {
+                "equipId": 1,
+                "name": "Wi-Fi",
+                "multiUnits": false,
+                "price": 1370.0,
+                "priceType": "PER_BOOKING"
+            }
+        }
+    ]
+}
