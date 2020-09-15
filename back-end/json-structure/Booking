@@ -3,13 +3,13 @@ POST--
 {   
     "attendees": 10,
     "room": { "roomId": 1},
-	  "roomLayout":{ "layoutId": 2},
+    "roomLayout":{ "layoutId": 2},
     "schedule": {
     	"bookedFor": "",
-		  "startTime": "08:00:00",
+	"startTime": "08:00:00",
     	"endTime": "12:00:00"
 	   },
-	  "totalCost": 5000.00,	
+    "totalCost": 5000.00,	
     "user":{ "userId": 1},
     "foods":[
         {   
@@ -17,13 +17,12 @@ POST--
             "quantity": 2,
             "amount": 80.00       
         }
-       
     ],
     "equipDetails":[ 
         {
-    		    "equipment":{ "equipId": 1},
-    		    "units": 2,
-    		    "price": 1500
+           "equipment":{ "equipId": 1},
+           "units": 2, 
+	   "price": 1500
         }
     ],
     "status": 1 
