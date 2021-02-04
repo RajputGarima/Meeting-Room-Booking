@@ -61,7 +61,7 @@ class EquipmentsList extends Component {
 
     handleSave(event) {
         this.toggleModal();
-        axios.post('http://localhost:3030/equipments', {
+        axios.post('http://localhost:8080/api/equipments', {
             title: this.state.title,
             price: this.state.price,
             hourlyAllowed: this.state.hourlyAllowed,
@@ -76,8 +76,8 @@ class EquipmentsList extends Component {
         const { selectedType } = this.state;
         const Equipments = this.props.equipments.map((equipment) => {
             return(
-                <tr key={equipment.id}>
-                    <td>{equipment.id + 1}</td>
+                <tr key={equipment.equipId}>
+                    <td>{equipment.equipId + 1}</td>
                     <td>{equipment.title}</td>
                     <td>
                         {equipment.multiUnits ? 'Yes':'No'}

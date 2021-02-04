@@ -1,7 +1,7 @@
 import * as ActionTypes from './ActionTypes';
 import axios from 'axios';
 
-const baseUrl = 'http://localhost:3030/'
+const baseUrl = 'http://localhost:8080/api/'
 
 export const addEquipment = (title, price, hourlyAllowed, multiUnits) => ({
     type: ActionTypes.ADD_EQUIPMENT,
@@ -20,7 +20,7 @@ export const addEquipments = (equipments) => ({
 
 export function fetchEquipments(){
     return function(dispatch){
-        axios.get( baseUrl + 'equipments')
+        axios.get('http://localhost:8080/api/equipments')
             .then((response) => dispatch(addEquipments(response.data)))
             .catch((response) => console.log("error"))
     }
